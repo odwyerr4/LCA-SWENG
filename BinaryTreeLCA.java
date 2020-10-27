@@ -1,26 +1,26 @@
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+
 
 public class BinaryTreeLCA {
-	public static class TreeNode
+	public static class Node
 	{
 		int data;
-		TreeNode left;
-		TreeNode right;
-		TreeNode(int data)
+		Node left;
+		Node right;
+		Node(int data)
 		{
 			this.data=data;
 		}
 	}
+	Node root;
  
-	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
+	public static Node lowestCommonAncestor(Node root, Node a, Node b) {
 		if(root == null)
 			return null;
 		if(root.data == a.data || root.data == b.data )
 			return root;
  
-		TreeNode left=lowestCommonAncestor(root.left,a,b);
-		TreeNode right=lowestCommonAncestor(root.right,a,b);
+		Node left=lowestCommonAncestor(root.left,a,b);
+		Node right=lowestCommonAncestor(root.right,a,b);
  
 		// If we get left and right not null , it is lca for a and b
 		if(left!=null && right!=null)
@@ -34,27 +34,27 @@ public class BinaryTreeLCA {
 	public static void main(String[] args)
 	{
 		// Creating a binary tree
-		TreeNode rootNode=createBinaryTree();
+		Node rootNode=createBinaryTree();
 		System.out.println("Lowest common ancestor for node 5 and 30:");
-		TreeNode node5=new TreeNode(5);
-		TreeNode node30=new TreeNode(30);
+		Node node5=new Node(5);
+		Node node30=new Node(30);
 		System.out.println(lowestCommonAncestor(rootNode,node5,node30).data);
  
 	}
  
-	public static TreeNode createBinaryTree()
+	public static Node createBinaryTree()
 	{
  
-		TreeNode rootNode =new TreeNode(40);
-		TreeNode node20=new TreeNode(20);
-		TreeNode node10=new TreeNode(10);
-		TreeNode node30=new TreeNode(30);
-		TreeNode node60=new TreeNode(60);
-		TreeNode node50=new TreeNode(50);
-		TreeNode node70=new TreeNode(70);
-		TreeNode node5=new TreeNode(5);
-		TreeNode node45=new TreeNode(45);
-		TreeNode node55=new TreeNode(55);
+		Node rootNode =new Node(40);
+		Node node20=new Node(20);
+		Node node10=new Node(10);
+		Node node30=new Node(30);
+		Node node60=new Node(60);
+		Node node50=new Node(50);
+		Node node70=new Node(70);
+		Node node5=new Node(5);
+		Node node45=new Node(45);
+		Node node55=new Node(55);
  
 		rootNode.left=node20;
 		rootNode.right=node60;
@@ -72,11 +72,7 @@ public class BinaryTreeLCA {
 		return rootNode;
 	}
 
-    @Test
-    
-    public void testLowestCommonAncestor(){
-        assertEquals(20, (, ));
-    }
+ 
 
 } 
 
