@@ -21,5 +21,8 @@ public class BinaryTreeLCATest {
         assertEquals("Expecting 60", 60, test.lowestCommonAncestor(test.root, Node50, Node70).data);
         assertEquals("Expecting 50", 50, test.lowestCommonAncestor(test.root, Node55, Node45).data);
         assertEquals("Expecting 40", 40, test.lowestCommonAncestor(test.root, Node20, test.root).data);
+        assertEquals("Expecting 40", -1, test.lowestCommonAncestor(test.root, null, test.root).data);
+    
+
     }
 }

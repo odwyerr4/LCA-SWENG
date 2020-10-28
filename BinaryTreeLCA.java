@@ -14,8 +14,13 @@ public class BinaryTreeLCA {
 	Node root;
  
 	public static Node lowestCommonAncestor(Node root, Node a, Node b) {
+		if((a == null) || (b == null)){
+			Node errorNode = new Node(-1);
+			return errorNode;
+		}
 		if(root == null)
-			return null;
+			return root;
+
 		if(root.data == a.data || root.data == b.data )
 			return root;
  
