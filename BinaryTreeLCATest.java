@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 
-
 public class BinaryTreeLCATest {
     @Test
     public void TestLCA(){
@@ -19,7 +18,8 @@ public class BinaryTreeLCATest {
         BinaryTreeLCA.Node Node55=new BinaryTreeLCA.Node(55);
         
         assertEquals("Expecting 20", 20, test.lowestCommonAncestor(test.root, Node5, Node30).data);
-
-
+        assertEquals("Expecting 60", 60, test.lowestCommonAncestor(test.root, Node50, Node70).data);
+        assertEquals("Expecting 50", 50, test.lowestCommonAncestor(test.root, Node55, Node45).data);
+        assertEquals("Expecting 40", 40, test.lowestCommonAncestor(test.root, Node20, test.root).data);
     }
 }
