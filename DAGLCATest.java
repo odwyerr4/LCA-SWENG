@@ -18,6 +18,18 @@ public class DAGLCATest {
         assertEquals("Expected 10 edges", 10, directAcyclic.Edges());
     }
 
+   @Test
+   public void testFindLCA(){
+    directAcyclicGraph();
+    //showing different levels within the graph
+    assertEquals("", 7, directAcyclic.findLCA(3, 4));
+    assertEquals("", 7, directAcyclic.findLCA(1, 4));
+    assertEquals("", 7, directAcyclic.findLCA(5, 2));
+    //swapping around the vertices v and w
+    assertEquals("", 5, directAcyclic.findLCA(1, 5));
+    assertEquals("", 5, directAcyclic.findLCA(5, 1));
+   }
+
 
     public void directAcyclicGraph(){
 		//  -> 1 -> 3 -> 5 ->

@@ -5,7 +5,6 @@ public class DAGLCA {
 	private int adjacent[][]; //2D array to tell if vertices are adjacent
 	private int indegree[]; //indegree of a vertex
 	private int outdegree[]; //outdegree of a vertex
-	private int visited[]; //checks if vertex has been visited
 
 	public DAGLCA(int Verts){
 		if(Verts < 0){
@@ -16,7 +15,6 @@ public class DAGLCA {
 		this.Edges = 0;
 		indegree = new int[Verts];
 		outdegree = new int[Verts];
-		visited = new int[Verts];
 		adjacent = new int[Verts][Verts];
 		for(int i = 0; i<Verts; i++){
 			for(int j = 0; j<Verts; j++){
@@ -58,5 +56,57 @@ public class DAGLCA {
 		Edges--;
 	}
 
-} 
+	public int findLCA(int v, int w){
+		validateVertex(v);
+		validateVertex(w);
+		int answer = LCAUtil(v, w);
+		return answer;
+		//if(Edges > 0){
+		//	int answer = LCAUtil(v, w);
+		//	return answer;
+		//}
+		//else{
+		//	throw new IllegalArgumentException("This graph is not an acyclic graph.");
+		//}
+	}
+
+	private int LCAUtil(int v, int w){
+		int vCount = 0;
+		int wCount = 0;
+		int[] vArray = new int[Edges];
+		int[] wArray = new int[Edges];
+		boolean[] vMarked = new boolean[Verts];
+		boolean[] wMarked = new boolean[Verts];
+		vArray[vCount] = v;
+		wArray[wCount] = w;
+		for(int x = 0; x<Verts; x++){ 
+			vMarked[x] = false;
+			wMarked[x] = false;
+		}
+		for(int i = 0; i<Verts; i++){
+			vMarked[v] = true;
+			wMarked[w] = true;
+			for(int j = 0; j<Verts; j++){
+				if(adjacent[i][j] == 1 && vMarked[i]){
+					vCount++;
+					vArray[vCount] = j;
+					vMarked[j] = true;
+				}
+				if(adjacent[i][j] == 1 && wMarked[i]){
+					wCount++;
+					wArray[wCount] = j;
+					wMarked[j] = true;
+				}
+				if(wArray[wCount] == vArray[vCount]){
+					int LowestCA = wArray[wCount];
+					return LowestCA;
+				}
+			}
+		}
+
+		return -1;
+	}	
+
+}
+
 
