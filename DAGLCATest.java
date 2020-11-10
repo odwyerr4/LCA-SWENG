@@ -32,11 +32,12 @@ public class DAGLCATest {
 
 
     public void directAcyclicGraph(){
-		//  -> 1 -> 3 -> 5 ->
-		//0    ^              7 -> 8             
-		//  -> 2 -> 4 -> 6 ->      
+        //                
+        //  -> 1 -> 3 -> 5
+		//0                -> 7 -> 8          
+		//  -> 2 -> 4 -> 6       
 		directAcyclic.addEdge(0, 1);
-		directAcyclic.addEdge(0, 2);
+        directAcyclic.addEdge(0, 2);
 		directAcyclic.addEdge(1, 3);
 		directAcyclic.addEdge(2, 4);
 		directAcyclic.addEdge(3, 5);
