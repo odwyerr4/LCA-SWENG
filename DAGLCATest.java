@@ -2,27 +2,35 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 
-public class BinaryTreeLCATest {
-    @Test
-    public void TestLCA(){
-        BinaryTreeLCA test = new BinaryTreeLCA();
-        test.root = BinaryTreeLCA.createBinaryTree();
-        BinaryTreeLCA.Node Node20=new BinaryTreeLCA.Node(20);
-		BinaryTreeLCA.Node Node10=new BinaryTreeLCA.Node(10);
-		BinaryTreeLCA.Node Node30=new BinaryTreeLCA.Node(30);
-		BinaryTreeLCA.Node Node60=new BinaryTreeLCA.Node(60);
-		BinaryTreeLCA.Node Node50=new BinaryTreeLCA.Node(50);
-		BinaryTreeLCA.Node Node70=new BinaryTreeLCA.Node(70);
-		BinaryTreeLCA.Node Node5=new BinaryTreeLCA.Node(5);
-		BinaryTreeLCA.Node Node45=new BinaryTreeLCA.Node(45);
-        BinaryTreeLCA.Node Node55=new BinaryTreeLCA.Node(55);
-        
-        assertEquals("Expecting 20", 20, test.lowestCommonAncestor(test.root, Node5, Node30).data);
-        assertEquals("Expecting 60", 60, test.lowestCommonAncestor(test.root, Node50, Node70).data);
-        assertEquals("Expecting 50", 50, test.lowestCommonAncestor(test.root, Node55, Node45).data);
-        assertEquals("Expecting 40", 40, test.lowestCommonAncestor(test.root, Node20, test.root).data);
-        assertEquals("Expecting 40", -1, test.lowestCommonAncestor(test.root, null, test.root).data);
-    
+public class DAGLCATest {
 
+    DAGLCA directAcyclic = new DAGLCA(9);
+
+    @Test
+    public void TestDAGLCA(){
+        
     }
+    @Test
+    public void testaddEdge(){
+        directAcyclicGraph();
+        assertEquals("Expected 9 edges", 9, directAcyclic.Edges());
+        directAcyclic.addEdge(6, 8);
+        assertEquals("Expected 10 edges", 10, directAcyclic.Edges());
+    }
+
+
+    public void directAcyclicGraph(){
+		//  -> 1 -> 3 -> 5 ->
+		//0    ^              7 -> 8             
+		//  -> 2 -> 4 -> 6 ->      
+		directAcyclic.addEdge(0, 1);
+		directAcyclic.addEdge(0, 2);
+		directAcyclic.addEdge(1, 3);
+		directAcyclic.addEdge(2, 4);
+		directAcyclic.addEdge(3, 5);
+		directAcyclic.addEdge(4, 6);
+		directAcyclic.addEdge(5, 7);
+		directAcyclic.addEdge(6, 7);
+		directAcyclic.addEdge(7, 8);
+	}
 }

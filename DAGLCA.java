@@ -1,83 +1,62 @@
 
+public class DAGLCA {
+	private int Verts; //Number of Vertices
+	private int Edges; //Number of Edges
+	private int adjacent[][]; //2D array to tell if vertices are adjacent
+	private int indegree[]; //indegree of a vertex
+	private int outdegree[]; //outdegree of a vertex
+	private int visited[]; //checks if vertex has been visited
 
-public class BinaryTreeLCA {
-	public static class Node
-	{
-		int data;
-		Node left;
-		Node right;
-		Node(int data)
-		{
-			this.data=data;
+	public DAGLCA(int Verts){
+		if(Verts < 0){
+			System.out.println("The number of vertices cannot be less than 0");
+		}
+
+		this.Verts = Verts;
+		this.Edges = 0;
+		indegree = new int[Verts];
+		outdegree = new int[Verts];
+		visited = new int[Verts];
+		adjacent = new int[Verts][Verts];
+		for(int i = 0; i<Verts; i++){
+			for(int j = 0; j<Verts; j++){
+				adjacent[i][j] = 0;
+			}
+		}
+
+	}
+
+	public int Verts(){
+		return Verts;
+	}
+
+	public int Edges(){
+		return Edges;
+	}
+
+	private void validateVertex(int v){
+		if(v<0 || v>=Verts){
+			System.out.println("Vertex is not valid");
 		}
 	}
-	Node root;
- 
-	public static Node lowestCommonAncestor(Node root, Node a, Node b) {
-		if((a == null) || (b == null)){
-			Node errorNode = new Node(-1);
-			return errorNode;
-		}
-		if(root == null)
-			return root;
 
-		if(root.data == a.data || root.data == b.data )
-			return root;
- 
-		Node left=lowestCommonAncestor(root.left,a,b);
-		Node right=lowestCommonAncestor(root.right,a,b);
- 
-		// If we get left and right not null , it is lca for a and b
-		if(left!=null && right!=null)
-			return root;
-		if(left== null)
-			return right;
-		else
-			return left;
- 
-	}
-	public static void main(String[] args)
-	{
-		// Creating a binary tree
-		Node rootNode=createBinaryTree();
-		System.out.println("Lowest common ancestor for node 5 and 30:");
-		Node node5=new Node(5);
-		Node node30=new Node(30);
-		System.out.println(lowestCommonAncestor(rootNode,node5,node30).data);
- 
-	}
- 
-	public static Node createBinaryTree()
-	{
- 
-		Node rootNode =new Node(40);
-		Node node20=new Node(20);
-		Node node10=new Node(10);
-		Node node30=new Node(30);
-		Node node60=new Node(60);
-		Node node50=new Node(50);
-		Node node70=new Node(70);
-		Node node5=new Node(5);
-		Node node45=new Node(45);
-		Node node55=new Node(55);
- 
-		rootNode.left=node20;
-		rootNode.right=node60;
- 
-		node20.left=node10;
-		node20.right=node30;
- 
-		node60.left=node50;
-		node60.right=node70;
- 
-		node10.left=node5;
-		node50.right=node55;
-
-		node50.left=node45;
-		return rootNode;
+	public void addEdge(int v, int w){
+		validateVertex(v);
+		validateVertex(w);
+		adjacent[v][w] = 1;
+		indegree[w]++;
+		outdegree[v]++;
+		Edges++;
 	}
 
- 
+	public void removeEdge(int v, int w){
+		validateVertex(v);
+		validateVertex(w);
+		adjacent[v][w] = 0;
+		indegree[w]--;
+		outdegree[v]--;
+		Edges--;
+	}
 
 } 
 
